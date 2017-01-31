@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Profile</title>
 </head>
 <body>
 <%@ include file="partials/navbar.jsp" %>
 
-<h1>Welcome to your profile <%= request.getAttribute("username") %> </h1>
+<h1>Welcome to your adLister profile Admin </h1>
 
 </body>
 </html>
