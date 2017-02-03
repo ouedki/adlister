@@ -23,6 +23,7 @@ public class RegisterServlet extends HttpServlet {
                 request.getParameter("password")
         );
         DaoFactory.getUserDao().insert(user);
+        request.getSession().setAttribute("user", user); // automatic login
         response.sendRedirect("/profile");
         // TODO: ensure the submitted information is valid
         // TODO: create a new user based off of the submitted information
