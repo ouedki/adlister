@@ -16,17 +16,18 @@ public class RegisterServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = new User(
-                request.getParameter("username"),
-                request.getParameter("email"),
-                request.getParameter("password")
-        );
-        DaoFactory.getUserDao().insert(user);
-        request.getSession().setAttribute("user", user); // automatic login
-        response.sendRedirect("/profile");
-        // TODO: ensure the submitted information is valid
-        // TODO: create a new user based off of the submitted information
-        // TODO: if a user was successfully created, send them to their profile
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        if (username != null && email != null && password != null && !username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+            User user = new User(username, email, password);
+            DaoFactory.getUserDao().insert(user);
+            request.getSession().setAttribute("user", user); //automatic login
+            response.sendRedirect("/profile");
+        } else {
+            doGet(request, response);
+        }
+
     }
 }
